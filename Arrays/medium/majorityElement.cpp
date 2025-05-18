@@ -10,20 +10,14 @@ int majorityElement(vector<int>& nums) {
     {
         mpp[nums[i]]+=1;
     }
-    int maxi=0;
-    int index=0;
     for(auto& p:mpp)
     {
         if(p.second>floor(n/2))
         {
             return p.first;
         }
-        else{
-            
-            if(maxi<p.second) index=p.first;
-        }
     }
-    return index;
+    return -1;
 }
 
 int majorityElementMooreVoting(vector<int>& nums) {
