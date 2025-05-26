@@ -15,6 +15,20 @@ int maxProfit(vector<int>& prices)
     if(mdiff<0) return 0;
     return mdiff;
 }
+
+int DP(vector<int>& prices)
+{
+    int mini=prices[0], profit=0;
+    int cost;
+    for(int i=1;i<prices.size();i++)
+    {
+        
+        cost=prices[i]-mini;
+        profit=max(profit,cost);
+        mini=min(mini,prices[i]);
+    }
+    return profit;
+}
 // ...existing code...
 
 int main() {
@@ -33,7 +47,6 @@ int main() {
 
     // Run tests
     for(int i = 0; i < testCases.size(); i++) {
-        int result = maxProfit(testCases[i]);
         cout << "Test Case " << i + 1 << ":\n";
         cout << "Prices: [";
         for(int j = 0; j < testCases[i].size(); j++) {
@@ -41,9 +54,22 @@ int main() {
             if(j < testCases[i].size() - 1) cout << ",";
         }
         cout << "]\n";
+
+        // Test both implementations
+        int resultMaxProfit = maxProfit(testCases[i]);
+        int resultDP = DP(testCases[i]);
+
         cout << "Expected Profit: " << expected[i] << "\n";
-        cout << "Got Profit: " << result << "\n";
-        cout << (result == expected[i] ? "PASSED" : "FAILED") << "\n\n";
+        cout << "MaxProfit Result: " << resultMaxProfit << " - " 
+             << (resultMaxProfit == expected[i] ? "PASSED" : "FAILED") << "\n";
+        cout << "DP Result: " << resultDP << " - " 
+             << (resultDP == expected[i] ? "PASSED" : "FAILED") << "\n";
+        
+        // Compare implementations
+        if(resultMaxProfit != resultDP) {
+            cout << "Warning: Implementations gave different results!\n";
+        }
+        cout << "\n";
     }
 
     return 0;
