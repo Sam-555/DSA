@@ -4,6 +4,7 @@
 #include<algorithm>
 using namespace std;
 vector<int> nextPermutation(vector<int>& nums) {
+    //incomplete
     vector<int>x;
     long digit=0;
     for(int i=0;i<nums.size();i++){
@@ -45,7 +46,6 @@ vector<int> nextPermutation2(vector<int>& nums) {
         if(nums[i]>nums[i-1]) {
             idx=i-1;
             break_p=nums[i-1];
-            cout<<"bp"<<break_p<<endl;
             break;
         }
     }
@@ -62,14 +62,13 @@ vector<int> nextPermutation2(vector<int>& nums) {
             {
                  mini=min(nums[i],mini);
             indi=i;
-            cout<<mini<<endl;
             }
         }
         int temp;
         temp=nums[idx];
         nums[idx]=mini;
         nums[indi]=temp;
-        sort(nums.begin()+idx+1,nums.end());
+        reverse(nums.begin()+idx+1,nums.end());
         return nums;
     }
 }
